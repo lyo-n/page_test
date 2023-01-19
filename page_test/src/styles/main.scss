@@ -36,7 +36,7 @@
         color: #FFFFFF;
     }
 }
-.main_button {
+.main_block_button {
     margin-top: 36px;
     
     background: #F4E041;
@@ -53,7 +53,73 @@
         border: 1px solid white;
     }
 }
-.main_block_users {
+.main_block_info {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.main_info_heading {
+    width: 80%;
+    margin: 0 auto;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.87);
+    margin-bottom: 50px;
+}
+.user {
     width: 91%;
     margin: 0 auto;
+    height: 254px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.user_block {
+    padding: 20px;
+    & p {
+        text-align: center;
+        font-family: 'Nunito';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: rgba(0, 0, 0, 0.87);
+    }
+}
+.user_photo_block {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    background: red;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.user_photo {
+    width: auto;
+    height: 100%;
+    margin: 0 auto;
+}
+.user_name {
+    margin-bottom: 20px;
+    width: 100%;    
+}
+.button_more {
+    
+    background: #F4E041;
+    border-radius: 80px;
+    border: none;
+    width: 100px;
+    height: 34px;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.87);
+    &:active{
+        border: 1px solid white;
+    }
 }
