@@ -78,6 +78,11 @@
     border-radius: 10px;
     margin-bottom: 10px;
 }
+//поправить
+.user:nth-last-child(2){
+    margin-bottom: 54px;
+}
+//
 .user_block {
     padding: 20px;
     & p {
@@ -107,8 +112,7 @@
     margin-bottom: 20px;
     width: 100%;    
 }
-.button_more {
-    
+.button_more {    
     background: #F4E041;
     border-radius: 80px;
     border: none;
