@@ -43,8 +43,8 @@ const handleInputPhone = ({ target: { value } }) => setPhone(value);
                         placeholder='Phone'
                     /> */}
                     <PhoneInput 
-                     className='input_phone'
-                        value={phone} 
+                        className='input_phone'
+                        // value={phone} 
                         onChange={handleInputPhone}>
                         
                     </PhoneInput>
