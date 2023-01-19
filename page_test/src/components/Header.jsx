@@ -1,6 +1,6 @@
 import React from 'react';
-
-
+import '../styles/header.scss';
+import Logo from '../assets/Logo.svg';
 
 
 
@@ -8,7 +8,11 @@ import React from 'react';
 const Header = () => {
     return (
             <div className="header">
-               testHeader
+                <img className="header_logo" src={Logo} alt="Logo" />
+                <div className="header_buttons">
+                    <button className="header_button">Users</button>
+                    <button className="header_button">Sign up</button>
+                </div>
             </div>
     );
 };

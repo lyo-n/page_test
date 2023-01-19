@@ -1,0 +1,34 @@
+.header {
+    width: 91%;
+    margin: 0 auto;
+    align-items: center;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+.header_logo {
+    height: 26px;
+    width: 104px;
+}
+.header_buttons{
+    width: 210px;
+    height: 34px;
+    display: flex;
+    justify-content: space-between;
+}
+.header_button {
+    background: #F4E041;
+    border-radius: 80px;
+    border: none;
+    width: 100px;
+    height: 34px;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.87);
+    &:active{
+        border: 1px solid white;
+    }
+}
+
