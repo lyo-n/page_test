@@ -1,10 +1,25 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../styles/main.scss';
 
 
 
 
+
+
+
 const Main = () => {
+    const [data, setUsers] = useState()
+    const [count, setCount] = useState(6)
+
+
+    const page = 1
+    useEffect(() => {
+        fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?page=${page}&count=${count}`, {
+            method: 'GET'
+        }).then(response => response.json())
+        .then(data => setUsers(data), console.log(data))
+    }, [])
+
     return (
         <div className="main">
             <div className="main_block">
@@ -14,29 +29,20 @@ const Main = () => {
             </div>
             <div className="main_block_info">
                 <h3 className="main_info_heading">Working with GET request</h3>
-                <div className="user">
-                    <div className="user_block">
-                        <div className="user_photo_block">
-                            <img className="user_photo" alt="" src=""/>
-                        </div>
-                        <p className="user_name">userName</p>
-                        <p className="user_position">userPosition</p>
-                        <p className="user_email">userEmail</p>
-                        <p className="user_phone">userphone</p>
+                {data?.users.map(user =>
+                    <div className="user">                   
+                        <div className="user_block">
+                            <div className="user_photo_block">
+                                <img className="user_photo" alt="" src={user.photo}/>
+                            </div>
+                            <p className="user_name">{user.name}</p>
+                            <p className="user_position">{user.position}</p>
+                            <p className="user_email">{user.email}</p>
+                            <p className="user_phone">{user.phone}</p>
+                        </div>                  
                     </div>
-                </div>
-                <div className="user">
-                    <div className="user_block">
-                        <div className="user_photo_block">
-                            <img className="user_photo" alt="" src=""/>
-                        </div>
-                        <p className="user_name">userName</p>
-                        <p className="user_position">userPosition</p>
-                        <p className="user_email">userEmail</p>
-                        <p className="user_phone">userphone</p>
-                    </div>
-                </div>
-                <button className="button_more">Show more</button>
+                )}
+                <button className="button_more" onClick={() => setCount(count + 6)}>Show more</button>
             </div>
             
         </div> 
