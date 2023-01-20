@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import {observer} from "mobx-react-lite";
+import { fetchUsers } from '../http/usersAPI';
 import '../styles/main.scss';
 
 
@@ -7,18 +9,25 @@ import '../styles/main.scss';
 
 
 
-const Main = () => {
+const Main = observer(() => {
     const [data, setUsers] = useState()
     const [count, setCount] = useState(6)
+    const [page, setPage] = useState(1)
+    console.log(data)
+    // const page = 1
 
-
-    const page = 1
     useEffect(() => {
-        fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?page=${page}&count=${count}`, {
-            method: 'GET'
-        }).then(response => response.json())
-        .then(data => setUsers(data), console.log(data))
-    }, [])
+        fetchUsers(count, page).then(data => setUsers(data))
+    }, [count, page])
+
+    // useEffect(() => {
+    //     fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?page=${page}&count=${count}`, {
+    //         method: 'GET'
+    //     }).then(response => response.json())
+    //     .then(data => setUsers(data), console.log(data))
+    // }, [])
+
+
 
     return (
         <div className="main">
@@ -47,6 +56,6 @@ const Main = () => {
             
         </div> 
     );
-};
+});
 
 export default Main;

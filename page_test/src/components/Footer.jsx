@@ -101,8 +101,6 @@ const handleInputPhone = ({ target: { value } }) => setPhone(value);
                     </div>
                     <div className="upload">
                         <button className="button_upload" onClick={handleUploadClick}>Upload</button>
-
-                        {/* <div>{file && `${file.name} - ${file.type}`}</div> */}
                         <div className="input_upload">
                             <label className="tests" for="select_file">
                                 {file && `${file.name}` || "Upload your photo"}
