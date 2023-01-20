@@ -9,7 +9,7 @@ import Logo from '../assets/Logo.svg';
 const Header = () => {
 
 function logIn () {
-    fetchLoginUsers().then(data => (data))
+    fetchLoginUsers().then(data => localStorage.setItem(`token`,`${data.token}`))
 }
 
     return (

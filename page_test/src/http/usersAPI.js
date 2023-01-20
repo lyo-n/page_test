@@ -17,7 +17,7 @@ export const fetchLoginPositions = async () => {
     return data
 }
 
-export const createUser = async (name, email, phone,position_id, photo) => {
+export const createUser = async (user) => {
     const {data} = await $authHost.post('/users ')
     return data
 }

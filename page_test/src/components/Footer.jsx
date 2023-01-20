@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState, useEffect} from 'react';
 import InputMask from 'react-input-mask';
-import { fetchLoginPositions } from '../http/usersAPI';
+import { fetchLoginPositions, createUser } from '../http/usersAPI';
 import '../styles/footer.scss';
 
 
@@ -16,10 +16,13 @@ function PhoneInput(props) {
   }
 
 const Footer = () => {
-const [phone, setPhone] = useState('');
-const [file, setFile] = useState();
-const [position, setPosition] = useState()
-console.log(position)
+    const [phone, setPhone] = useState('');
+    const [file, setFile] = useState();
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [position_id, setPositionId] = useState();
+    const [position, setPosition] = useState()
+
     useEffect(() => {
         fetchLoginPositions().then(data => setPosition(data))
     }, [])
@@ -34,23 +37,20 @@ const handleUploadClick = () => {
   if (!file) {
     return;
   }
-
-  // 👇 Uploading the file using the fetch API to the server
-//   fetch('https://httpbin.org/post', {
-//     method: 'POST',
-//     body: file,
-//     // 👇 Set headers manually for single file upload
-//     headers: {
-//       'content-type': file.type,
-//       'content-length': `${file.size}`, // 👈 Headers need to be a string
-//     },
-//   })
-//     .then((res) => res.json())
-//     .then((data) => console.log(data))
-//     .catch((err) => console.error(err));
 };
-const handleInputPhone = ({ target: { value } }) => setPhone(value);
 
+
+const addUser = () => {
+    const formData = new FormData()        
+    formData.append('name', name)
+    // formData.append('price', `${price}`)
+    // formData.append('volume', `${volume}`) 
+    formData.append('email', email)
+    formData.append('phone', phone)
+    formData.append('photo', file)
+    formData.append('position_id', position_id) 
+    createUser(formData).then(data => data.user)
+}
 
     return (
             <div className="footer">
@@ -60,11 +60,13 @@ const handleInputPhone = ({ target: { value } }) => setPhone(value);
                         className='input_name'
                         type="text" 
                         placeholder='Your name'
+                        onChange={(e) => setName(e.target.value)}
                     />
                     <input 
                         className='input_email'
                         type="email" 
                         placeholder='Email'
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     {/* <input 
                         className='input_phone'
@@ -78,7 +80,9 @@ const handleInputPhone = ({ target: { value } }) => setPhone(value);
                     <PhoneInput 
                         className='input_phone'
                         // value={phone} 
-                        onChange={handleInputPhone}>
+                        // onChange={handleInputPhone}
+                        onChange={(e) => setPhone(e.target.value)}
+                    >
                         
                     </PhoneInput>
                     <p className='phone_mask'>+38 (XXX) XXX - XX - XX</p>
@@ -92,7 +96,7 @@ const handleInputPhone = ({ target: { value } }) => setPhone(value);
                                     {
                                         pos.name == `Content manager` && "Frontend developer" || 
                                         pos.name == `Security` && "Backend developer" || 
-                                        pos.name == `Designer`&& "Designer" ||                                         
+                                        pos.name == `Designer`&& "Designer" ||                                    
                                         pos.name == `Lawyer` && "QA"
                                     }
                                 </label>
@@ -128,7 +132,7 @@ const handleInputPhone = ({ target: { value } }) => setPhone(value);
                         </div>
                         <input className="select_file" id="select_file" type="file" onChange={handleFileChange}/>
                     </div>
-                    <button className="create_user">Sign up</button>
+                    <button className="create_user" onClick={addUser}>Sign up</button>
                 </div>       
             </div> 
     );
