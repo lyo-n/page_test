@@ -1,4 +1,4 @@
-import {$host} from "./index";
+import {$host, $authHost} from "./index";
 
 
 export const fetchUsers = async (count, page) => {
@@ -8,6 +8,17 @@ export const fetchUsers = async (count, page) => {
 
 export const fetchLoginUsers = async () => {
     const {data} = await $host.get(`token`)
+    return data
+}
+
+export const fetchLoginPositions = async () => {
+    const {data} = await $host.get(`/positions`)
+    // console.log({data})
+    return data
+}
+
+export const createUser = async (name, email, phone,position_id, photo) => {
+    const {data} = await $authHost.post('/users ')
     return data
 }
 

@@ -1,5 +1,6 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useState, useEffect} from 'react';
 import InputMask from 'react-input-mask';
+import { fetchLoginPositions } from '../http/usersAPI';
 import '../styles/footer.scss';
 
 
@@ -17,6 +18,11 @@ function PhoneInput(props) {
 const Footer = () => {
 const [phone, setPhone] = useState('');
 const [file, setFile] = useState();
+const [position, setPosition] = useState()
+console.log(position)
+    useEffect(() => {
+        fetchLoginPositions().then(data => setPosition(data))
+    }, [])
 
 const handleFileChange = (e) => {
   if (e.target.files) {
@@ -78,7 +84,21 @@ const handleInputPhone = ({ target: { value } }) => setPhone(value);
                     <p className='phone_mask'>+38 (XXX) XXX - XX - XX</p>
                     <p className='select_title'>Select your position</p>
                     <div className='input_radio'>
-                        <div className="radio_block">
+                        {position?.positions.map(pos =>
+                            <div className="radio_block">
+                                <input type="radio" 
+                                name="contact" value={pos.id} id="front"/>
+                                <label for="front">
+                                    {
+                                        pos.name == `Content manager` && "Frontend developer" || 
+                                        pos.name == `Security` && "Backend developer" || 
+                                        pos.name == `Designer`&& "Designer" ||                                         
+                                        pos.name == `Lawyer` && "QA"
+                                    }
+                                </label>
+                            </div>
+                        )}
+                        {/* <div className="radio_block">
                             <input type="radio" 
                             name="contact" value="email" id="front"/>
                             <label for="front">Frontend developer</label>
@@ -97,7 +117,7 @@ const handleInputPhone = ({ target: { value } }) => setPhone(value);
                             <input type="radio" 
                             name="contact" value="mail" id='qa'/>
                             <label className="test" for="qa">QA</label>
-                        </div>                        
+                        </div>                         */}
                     </div>
                     <div className="upload">
                         <button className="button_upload" onClick={handleUploadClick}>Upload</button>
@@ -109,8 +129,7 @@ const handleInputPhone = ({ target: { value } }) => setPhone(value);
                         <input className="select_file" id="select_file" type="file" onChange={handleFileChange}/>
                     </div>
                     <button className="create_user">Sign up</button>
-                </div>
-               
+                </div>       
             </div> 
     );
 };
