@@ -2,7 +2,12 @@ import {$host} from "./index";
 
 
 export const fetchUsers = async (count, page) => {
-    const {data} = await $host.get(`users?page=${page}&count=${count}`)
+    const {data} = await $host.get(`/users?page=${page}&count=${count}`)
+    return data
+}
+
+export const fetchLoginUsers = async () => {
+    const {data} = await $host.get(`token`)
     return data
 }
 

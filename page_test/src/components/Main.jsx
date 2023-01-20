@@ -4,10 +4,6 @@ import '../styles/main.scss';
 
 
 
-
-
-
-
 const Main = () => {
     const [data, setUsers] = useState()
     const [count, setCount] = useState(6)
