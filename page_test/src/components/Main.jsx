@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {observer} from "mobx-react-lite";
 import { fetchUsers } from '../http/usersAPI';
 import '../styles/main.scss';
 
@@ -9,24 +8,14 @@ import '../styles/main.scss';
 
 
 
-const Main = observer(() => {
+const Main = () => {
     const [data, setUsers] = useState()
     const [count, setCount] = useState(6)
     const [page, setPage] = useState(1)
-    console.log(data)
-    // const page = 1
 
     useEffect(() => {
         fetchUsers(count, page).then(data => setUsers(data))
     }, [count, page])
-
-    // useEffect(() => {
-    //     fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?page=${page}&count=${count}`, {
-    //         method: 'GET'
-    //     }).then(response => response.json())
-    //     .then(data => setUsers(data), console.log(data))
-    // }, [])
-
 
 
     return (
@@ -51,11 +40,15 @@ const Main = observer(() => {
                         </div>                  
                     </div>
                 )}
-                <button className="button_more" onClick={() => setCount(count + 6)}>Show more</button>
+                {data?.count !== data?.total_users ?
+                    <button className="button_more" onClick={() => setCount(count + 6)}>Show more</button>
+                    :
+                    <div></div> 
+                }
             </div>
             
         </div> 
     );
-});
+};
 
 export default Main;

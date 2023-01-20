@@ -2,11 +2,7 @@ import {$host} from "./index";
 
 
 export const fetchUsers = async (count, page) => {
-    // const page = 1
-    // console.log(count)
-    // const count = 6
     const {data} = await $host.get(`users?page=${page}&count=${count}`)
-    // console.log(data)
     return data
 }
 
